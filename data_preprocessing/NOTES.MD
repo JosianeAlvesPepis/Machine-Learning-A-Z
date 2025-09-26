@@ -47,4 +47,47 @@ If we try to compare similarity between people, the large salary values will dom
 
 By applying **feature scaling**, both features are transformed to comparable ranges, making it easier for algorithms (like distance-based models: KNN, clustering) to work properly.
 
+___
+
+# Columns in Machine Learning
+
+## Categorical Features (Independent Variables)
+- Columns with categories (non-numeric).
+- Examples: `Country`, `Gender`, `Product Type`.
+- Need to be encoded (e.g., **OneHotEncoder**, **LabelEnconder**) so that algorithms can understand them.
+
+## Features (Independent Variables / Predictors)
+- The **input columns** we use to make predictions.
+- Can be numerical or categorical (after encoding).
+- Examples: if predicting **Car Price**, the features could be `Age`, `Mileage`, `Engine Size`.
+
+## Target (Dependent Variable / Labels)
+- The **output column** we want to predict.
+- Example: 
+    - For **regression**: `Car Price` (continuous value)
+    - For **classification**: `Spam` (Yes/No), `Customer Segment` (A/B/C).
+
+---
+
+# Using `.iloc` in Pandas
+
+`.iloc` is a method in pandas used to select data by **row and column positions (index numbers)**, not by names.
+Think of it as "index-location"
+
+## Basic Syntax
+
+```
+    dataset.iloc[rows, columns]
+
+```
+- `rows`: index positions of the rows you want.
+- `columns`: index positions of the columns you want.
+
+## Why It's Useful
+- Makes it easy to **separate features (x)** and **Target (y)**.
+- Works consistently even if column names change.
+- Very common in preprocessing steps.
+
+___
+
 
