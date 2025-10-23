@@ -29,5 +29,20 @@ Inside each notebook, I include installation instructions for the libraries used
 
 This section includes notebooks on data preprocessing: importing datasets, cleaning datasets, handling missing values, encoding categorical variables, splitting into training and test sets, and applying features scaling to prepare data for machine learning models.
 
+### [Importance of Training-Test Split in ML Model Evaluation](data_preprocessing/notes_data_preprocessing.md#importance-of-training-test-split-in-ml-model-evaluation)
 
+### [Feature Scaling](data_preprocessing/notes_data_preprocessing.md#feature-scaling)
+#### [1. Normalization (Min-Max Scaling)](data_preprocessing/notes_data_preprocessing.md#1-normalization-min-max-scaling)
+#### [2. Standardization (Z-score Scaling))](data_preprocessing/notes_data_preprocessing.md#2-standardization-z-score-scaling)
 
+### [Columns in Machine Learning](data_preprocessing/notes_data_preprocessing.md#columns-in-machine-learning)
+#### [Categorical Features (Independent Variables)](data_preprocessing/notes_data_preprocessing.md#categorical-features-independent-variables)
+#### [Features (Independent Variables / Predictors)](data_preprocessing/notes_data_preprocessing.md#features-independent-variables--predictors)
+#### [Target (Dependent Variable / Labels)](data_preprocessing/notes_data_preprocessing.md#target-dependent-variable--labels)
+
+### [Using `.iloc` in Pandas](data_preprocessing/notes_data_preprocessing.md#using-iloc-in-pandas)
+
+### [Handling Missing Data with Imputer](data_preprocessing/notes_data_preprocessing.md#handling-missing-data-with-imputer)
+#### [1. Create the Imputer Using `SimpleImputer` (scikit-learn)](data_preprocessing/notes_data_preprocessing.md#1-create-the-imputer-using-simpleimputer-scikit-learn)
+
+### [Encoding categorical data](data_preprocessing/notes_data_preprocessing.md#encoding-categorical-data)

@@ -84,10 +84,81 @@ Think of it as "index-location"
 - `columns`: index positions of the columns you want.
 
 ## Why It's Useful
-- Makes it easy to **separate features (x)** and **Target (y)**.
+- Makes it easy to **separate features (X)** and **Target (y)**.
 - Works consistently even if column names change.
 - Very common in preprocessing steps.
 
 ___
 
+# Handling Missing Data with Imputer
+In real datasets, it's common to have **missing values** (e.g., some ages, salaries, or survey answers are not recorded).
+Machine Learning algorithms cannot work with missing values directly, so we need to **fill them in** (a process called imputation).
 
+## 1. Create the Imputer Using `SimpleImputer` (scikit-learn)
+
+```
+imputer = SimpleImputer(missing_values=np.nan, strategy='mean')
+
+```
+- `missing_values=np.nan` -> look for `NaN` (missing) values.
+- `strategy='mean'` -> replace missing values with the **mean of the column**.
+    - **Use case**: Numerical data without many outliers.
+    - Example: Replacing missing **salaries** in a dataset of employees where most values are close together.
+    - Not ideal if the column has strong outliers (e.g., one billionaire in a salary dataset).
+
+Other strategies:
+- `"median"` -> replace with median.
+    - **Use case**: Numerical data with **outliers**.
+    - Example: Replacing missing **house prices** where some mansions cost millions but must houses are average.
+    - Median is more **robust** to extreme values.
+- `"most_frequent"` -> replace with mode.
+    - **Use case**: Categorical data.
+    - Example: Filling missing values in **Country** (e.g., if "USA" is the most common, replace missing entries with "USA").
+    - Works best when one category is dominant.
+- `"constant"` -> replace with a fixed value you choose.
+    - **Use case**: When you want to fill missing values with a fixed number ou label.
+    - Example: Replace missing **Gender** with `"Unknown"`, or missing numerical values with `0`.
+
+### Rule of Thumb:
+- Numerical data without outliers -> `mean`
+- Numerical data with outliers -> `median`
+- Categorical data -> `most_frequent`
+- Special cases / "missing is meaningful" -> `constant`
+
+## Fit and Transform the Data
+
+```
+dataset[['Age', 'Salary']] = imputer.fit_transform(dataset[['Age', 'Salary']])
+
+```
+
+- `fit()` -> learns how to replace missing values (e.g., calculates mean).
+- `transform()` -> applies the replacement.
+- `fit_transform()` -> does both in one step.
+
+## Why It's Important
+- Keeps dataset **complete** without dropping rows/columns.
+- Prevent **bias** (e.g., dropping all rows with missing salaries might remove valuable data).
+- Makes models more **robust** by handling real-world messy data.
+
+___
+
+# Encoding categorical data
+Most ML algorithms expect **numeric features**. Categorical values like `"Red"`, `"Brazil"`, or `"High"` must be converted
+to numbers **without introducing false order or distances** between the categories.
+
+## Why we use One-Hot Encoding
+- It creates one binary column per category (on/off), so the model **doesn't assume any order** (e.g "Red" isn't greater
+than "Blue").
+- Works well for **nominal** features such as Country Color, Product ID.
+- Safer for linear models because it avoids misleading the model with arbitrary numeric labels.
+
+## When Ordinal Encoding is better
+- Use it only when the categories have a **true order** (e.g., *Low* < *Medium* < *High* < *Advanced*)
+- It encodes categories as 1, 2, 3... respecting that order.
+
+## Why use a ColumnTransformer
+- It lets you **apply the right transform to the right columns** (e.g., One-Hot to categorical columns, pass numeric columns
+through unchanged).
+- Keeps **all preprocessing in one place**, which reduces mistakes and makes your pipeline reproducible.
+- 
